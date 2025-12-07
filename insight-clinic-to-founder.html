@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From Clinic Management to Startup Founder: The Entrepreneurial Mindset | Sagar Jha</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f7f9fc;
+            --text-color: #1f2937;
+            --primary-color: #00bcd4;
+            --secondary-color: #15a39a;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            --border-color: #e5e7eb;
+        }
+
+        .dark-mode {
+            --bg-color: #121212;
+            --text-color: #e5e7eb;
+            --primary-color: #4db6ac;
+            --secondary-color: #26a69a;
+            --card-bg: #1f2937;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+            --border-color: #374151;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.5s, color 0.5s;
+            scroll-behavior: smooth;
+        }
+
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .article-header {
+            margin-bottom: 3rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 2rem;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+
+        .article-content {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .article-content h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--secondary-color);
+        }
+
+        .article-content ul, .article-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.75rem;
+        }
+
+        .quote {
+            background-color: var(--card-bg);
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            border-radius: 0.5rem;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+            background-color: var(--card-bg);
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+        }
+
+        .back-button:hover {
+            background-color: var(--primary-color);
+            color: var(--card-bg);
+            transform: translateX(-4px);
+        }
+
+        #floating-controls-panel {
+            position: fixed;
+            bottom: 1rem;
+            left: 1rem;
+            z-index: 60;
+        }
+
+        .floating-button {
+            width: 56px;
+            height: 56px;
+            border-radius: 9999px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.2s ease-in-out;
+            color: var(--text-color);
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+        }
+
+        .floating-button:hover {
+            background-color: var(--primary-color);
+            color: var(--card-bg);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <div class="article-container">
+        <a href="main.html#insights" class="back-button">← Back to Portfolio</a>
+
+        <article class="article-header">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="text-4xl">💼</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4" style="color: var(--primary-color);">
+                From Clinic Management to Startup Founder: The Entrepreneurial Mindset
+            </h1>
+            <div class="article-meta">
+                <span>📅 October 2024</span>
+                <span>⏱️ 7 min read</span>
+                <span>✍️ Sagar Jha</span>
+            </div>
+        </article>
+
+        <div class="article-content">
+            <h2>The Unexpected Path to Entrepreneurship</h2>
+            <p>
+                When I started my career in healthcare, I never imagined I would become an entrepreneur founding an e-commerce startup. 
+                My journey was rooted in clinical practice—working across multiple clinics in Kathmandu, managing operations, and directly 
+                serving patients. Yet this experience became the foundation for recognizing opportunities and building a business mindset.
+            </p>
+
+            <p>
+                The transition from clinical practice to entrepreneurship wasn't a sudden leap; it was a gradual awakening to the systemic 
+                problems in healthcare delivery that could only be solved through business innovation. Every challenge I faced in clinics—
+                supply chain issues, cost management, operational efficiency—was actually a business problem waiting for an entrepreneurial solution.
+            </p>
+
+            <h2>What Clinic Management Taught Me About Business</h2>
+
+            <h3>1. Operations Matter More Than You Think</h3>
+            <p>
+                Running multiple clinics taught me that excellence isn't just about clinical skills—it's about logistics, inventory management, 
+                staff coordination, and operational efficiency. These are the unglamorous but critical aspects of any business. A perfectly 
+                skilled healthcare provider in a poorly managed clinic delivers mediocre results. Conversely, excellent operations amplify 
+                clinical quality.
+            </p>
+
+            <h3>2. Customer Experience Is King</h3>
+            <p>
+                In clinics, every patient interaction matters. From the moment a patient enters to how their follow-up is managed, every 
+                touchpoint shapes their perception. This customer-centric mindset is equally critical in startups. Whether you're serving 
+                patients or clinic partners, understanding their needs and exceeding expectations is what builds loyalty and sustainable growth.
+            </p>
+
+            <h3>3. Cost Efficiency Without Compromising Quality</h3>
+            <p>
+                Clinics operate on tight margins. Managing costs—from supplies to staff—without sacrificing quality taught me the fine art 
+                of resource optimization. This principle directly translates to startup management. How do you scale without burning cash? 
+                How do you deliver premium quality at competitive prices? These were clinic problems that became startup problems.
+            </p>
+
+            <h3>4. Relationships Are Your Most Valuable Asset</h3>
+            <p>
+                Success in clinic management relied heavily on relationships—with suppliers, staff, patients, and peers. As an entrepreneur, 
+                I quickly realized that these same relationship-building skills are crucial. Your network is your net worth. Every clinic 
+                partner, every industry contact, and every patient testimonial became part of the ecosystem that supports a startup.
+            </p>
+
+            <h2>The Entrepreneurial Mindset</h2>
+
+            <div class="quote">
+                "Entrepreneurship isn't just about having a good idea. It's about the relentless pursuit of solving a problem better than 
+                anyone else, at scale, and with sustainable economics."
+            </div>
+
+            <p>
+                An entrepreneurial mindset consists of several key characteristics:
+            </p>
+
+            <ul>
+                <li><strong>Problem-First Thinking:</strong> Identify real problems before creating solutions. Medizo emerged from observing 
+                actual gaps in healthcare supply chains, not from a desire to build an e-commerce platform.</li>
+                <li><strong>Resilience:</strong> Startups face constant obstacles. Clinic management prepared me to handle crises, adapt 
+                quickly, and find solutions under pressure.</li>
+                <li><strong>Continuous Learning:</strong> The healthcare environment changes constantly. This taught me the importance of 
+                staying informed, adapting to change, and never assuming you have all the answers.</li>
+                <li><strong>Risk Assessment:</strong> Every clinical decision involves weighing risks and benefits. In business, this becomes 
+                strategic risk management—understanding what risks are worth taking and which ones could be fatal.</li>
+                <li><strong>Customer Obsession:</strong> Ultimately, success is determined by whether customers find value in what you offer. 
+                This obsessive focus on value delivery drives every decision in both clinical and entrepreneurial contexts.</li>
+            </ul>
+
+            <h2>From Managing Clinics to Managing a Startup</h2>
+
+            <p>
+                While clinic management and startup founding share many principles, they also differ significantly. As a clinic manager, 
+                I had established revenue streams, known operational procedures, and relatively predictable outcomes. As a founder, I'm 
+                operating in uncertainty, managing limited resources, and constantly pivoting based on market feedback.
+            </p>
+
+            <p>
+                However, the fundamentals remain constant: solve real problems, operate efficiently, treat people well, and continuously 
+                improve. These principles work whether you're managing a 10-person clinic or scaling a startup to serve thousands.
+            </p>
+
+            <h2>Lessons for Aspiring Healthcare Entrepreneurs</h2>
+
+            <h3>Get Your Hands Dirty First</h3>
+            <p>
+                Before starting a healthcare business, work in the industry. Understand the challenges from the ground level. This practical 
+                experience is invaluable and something no MBA or business course can fully teach.
+            </p>
+
+            <h3>Listen More Than You Talk</h3>
+            <p>
+                When I started building Medizo, I spent months talking to clinic owners, healthcare providers, and patients. Their feedback 
+                shaped the platform far more than my initial assumptions. Entrepreneurs who assume they know better than their customers 
+                often fail.
+            </p>
+
+            <h3>Think Long-Term While Acting Short-Term</h3>
+            <p>
+                Startups need to survive the next 3 months while building toward a 5-year vision. This balancing act is what separates 
+                successful founders from those who burn out or give up too early.
+            </p>
+
+            <h3>Build for Your Market, Not Your Ego</h3>
+            <p>
+                It's easy to build what you think is impressive. It's hard to build what your market actually needs and is willing to pay for. 
+                Medizo's design came from market needs, not technological sophistication.
+            </p>
+
+            <h2>Looking Forward</h2>
+
+            <p>
+                My journey from clinic management to startup founder isn't complete. In many ways, I'm still a clinician using business as 
+                a tool to solve healthcare problems. The entrepreneurial mindset isn't about abandoning your core expertise—it's about applying 
+                it at scale to create systemic change.
+            </p>
+
+            <p>
+                As I continue to build Medizo, I carry the lessons from every clinic I managed, every patient I served, and every challenge 
+                I overcame. These experiences aren't background—they're the foundation upon which sustainable entrepreneurship is built.
+            </p>
+
+            <p style="margin-top: 3rem; font-style: italic; color: var(--text-color); opacity: 0.8;">
+                — Sagar Jha, Founder & Entrepreneur
+            </p>
+        </div>
+    </div>
+
+    <div id="floating-controls-panel">
+        <button id="theme-toggle" class="floating-button" aria-label="Toggle dark mode">
+            <svg id="theme-icon" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.929a1.001 1.001 0 00-1.414 0c-.896.896-2.288 1.121-3.414.654A6.001 6.001 0 0110 5.001c.17 0 .339.018.508.056.288.067.587.165.882.289a8.001 8.001 0 004.538 4.538 6.001 6.001 0 01.654 3.414 1.001 1.001 0 000 1.414z"></path>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const root = document.documentElement;
+
+        function applyTheme(isDark) {
+            if (isDark) {
+                root.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                root.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light');
+            }
+            updateThemeIcon(isDark);
+        }
+
+        function updateThemeIcon(isDark) {
+            const iconPath = isDark
+                ? 'M17.293 13.929a1.001 1.001 0 00-1.414 0c-.896.896-2.288 1.121-3.414.654A6.001 6.001 0 0110 5.001c.17 0 .339.018.508.056.288.067.587.165.882.289a8.001 8.001 0 004.538 4.538 6.001 6.001 0 01.654 3.414 1.001 1.001 0 000 1.414z'
+                : 'M10 2a8 8 0 018 8c0 2.272-.662 4.385-1.803 6.162A8 8 0 0110 18v-2a6 6 0 006-6c0-2.072-.843-3.957-2.193-5.307A7.962 7.962 0 0110 4z';
+            themeIcon.querySelector('path').setAttribute('d', iconPath);
+        }
+
+        const storedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
+            applyTheme(true);
+        } else {
+            applyTheme(false);
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const isDark = root.classList.contains('dark-mode');
+            applyTheme(!isDark);
+        });
+    </script>
+</body>
+
+</html>

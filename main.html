@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sagar Jha | Clinic Hygiene Specialist & Founder of Medizo</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* ---------------------------------
+           1. CSS Custom Properties (Themes)
+        ---------------------------------- */
+        :root {
+            /* Light Theme Defaults */
+            --bg-color: #f7f9fc;
+            --text-color: #1f2937;
+            --primary-color: #00bcd4;
+            /* Teal/Cyan */
+            --secondary-color: #15a39a;
+            /* Darker Teal */
+            --card-bg: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            --border-color: #e5e7eb;
+            --particle-color: rgba(0, 188, 212, 0.5);
+            /* Cyan */
+        }
+
+        .dark-mode {
+            /* Dark Theme Overrides */
+            --bg-color: #121212;
+            --text-color: #e5e7eb;
+            --primary-color: #4db6ac;
+            /* Softer Teal */
+            --secondary-color: #26a69a;
+            /* Medium Teal */
+            --card-bg: #1f2937;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+            --border-color: #374151;
+            --particle-color: rgba(77, 182, 172, 0.3);
+            /* Softer Teal */
+        }
+
+        /* ---------------------------------
+           2. Global and Utility Styles
+        ---------------------------------- */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.5s, color 0.5s;
+            scroll-behavior: smooth;
+        }
+
+        section {
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            padding: 1.25rem;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.5s, box-shadow 0.5s, border-color 0.5s;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-weight: 800;
+            font-size: 2.25rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        /* ---------------------------------
+           3. Navbar Styling
+        ---------------------------------- */
+        #navbar {
+            background-color: rgba(var(--bg-color), 0.95);
+            backdrop-filter: blur(8px);
+            z-index: 50;
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.5s, border-color 0.5s;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-link:hover {
+            background-color: var(--secondary-color);
+            color: var(--card-bg);
+            /* Use card-bg for contrast against secondary */
+        }
+
+        .nav-link.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* ---------------------------------
+           4. Background Canvas (Nebula/Particles)
+        ---------------------------------- */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        /* ---------------------------------
+           5. Floating Control Panel Styling
+           (Now only contains the theme toggle)
+        ---------------------------------- */
+        #floating-controls-panel {
+            position: fixed;
+            bottom: 1rem;
+            left: 1rem;
+            z-index: 60;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .floating-button {
+            width: 56px;
+            height: 56px;
+            border-radius: 9999px;
+            /* Full rounded */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.2s ease-in-out;
+            color: var(--text-color);
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+        }
+
+        .floating-button:hover {
+            background-color: var(--primary-color);
+            color: var(--card-bg);
+            transform: scale(1.05);
+        }
+
+        /* ---------------------------------
+           6. Form Styling
+        ---------------------------------- */
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.2);
+        }
+
+        /* ---------------------------------
+           7. Animation (Scroll Reveal)
+        ---------------------------------- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ---------------------------------
+           8. Skill Card Enhancements
+        ---------------------------------- */
+        .skill-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, var(--card-bg) 0%, var(--card-bg) 100%);
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 188, 212, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .skill-card:hover::before {
+            left: 100%;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 188, 212, 0.3);
+            border-color: var(--primary-color);
+        }
+
+        .skill-card .skill-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover .skill-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .skill-card .skill-level {
+            display: flex;
+            gap: 0.25rem;
+            margin-top: 0.75rem;
+            justify-content: center;
+        }
+
+        .skill-level-dot {
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 50%;
+            background-color: var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .skill-level-dot.filled {
+            background-color: var(--primary-color);
+            box-shadow: 0 0 8px var(--primary-color);
+        }
+
+        .skill-card:hover .skill-level-dot.filled {
+            animation: pulse 0.6s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.3);
+            }
+        }
+
+        /* ---------------------------------
+           9. About Section Enhancements
+        ---------------------------------- */
+        .about-highlight {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            transition: all 0.3s ease;
+        }
+
+        .about-card:hover .about-highlight {
+            filter: brightness(1.2);
+        }
+
+        .about-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            background-color: var(--card-bg);
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .about-stat:hover {
+            border-color: var(--primary-color);
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 188, 212, 0.2);
+        }
+
+        .about-stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .about-stat-label {
+            font-size: 0.875rem;
+            color: var(--text-color);
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Canvas for Floating Particle Background -->
+    <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+    <!-- Sticky Responsive Navbar -->
+    <nav id="navbar" class="sticky top-0 w-full shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo/Name -->
+                <a href="#home" class="text-xl font-bold tracking-tight uppercase"
+                    style="color:var(--primary-color); letter-spacing: 0.15em;">Sagar Jha</a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-4 items-center">
+                    <a href="#home" class="nav-link" data-section="home">Home</a>
+                    <a href="#about" class="nav-link" data-section="about">About</a>
+                    <a href="#experience" class="nav-link" data-section="experience">Experience</a>
+                    <a href="#skills" class="nav-link" data-section="skills">Skills</a>
+                    <a href="#insights" class="nav-link" data-section="insights">Insights</a>
+                    <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden">
+                    <button id="menu-button" type="button"
+                        class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                        aria-controls="mobile-menu" aria-expanded="false" aria-label="Open main menu">
+                        <svg class="block h-6 w-6" id="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg class="hidden h-6 w-6" id="close-icon" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="nav-link block" data-section="home">Home</a>
+                <a href="#about" class="nav-link block" data-section="about">About</a>
+                <a href="#experience" class="nav-link block" data-section="experience">Experience</a>
+                <a href="#skills" class="nav-link block" data-section="skills">Skills</a>
+                <a href="#insights" class="nav-link block" data-section="insights">Insights</a>
+                <a href="#contact" class="nav-link block" data-section="contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="min-h-[calc(100vh-4rem)] flex items-center reveal">
+            <!-- Modified Hero Section to include a professional image -->
+            <div class="grid md:grid-cols-3 gap-6 items-center px-4">
+
+                <!-- Image Column (Order 2 on mobile, 1 on desktop) -->
+                <div class="md:col-span-1 flex justify-center order-2 md:order-1">
+                    <div class="w-64 h-64 md:w-80 md:h-80 relative">
+                        <!-- Decorative ring/border -->
+                        <div class="absolute inset-0 rounded-full border-4"
+                            style="border-color: var(--secondary-color); opacity: 0.3;"></div>
+                        <!-- Profile Image -->
+                        <img src="/Images/image.png"
+                            onerror="this.onerror=null; this.src='https://placehold.co/800x800/4db6ac/ffffff?text=Dr.+Sagar+Jha+BDS';"
+                            alt="Professional portrait of Dr. Sagar Jha, BDS"
+                            class="w-full h-full object-cover rounded-full transform hover:scale-[1.02] transition duration-300"
+                            style="box-shadow: 0 0 0 8px var(--card-bg), 0 0 0 10px var(--primary-color);">
+                    </div>
+                </div>
+
+                <!-- Text Column (Order 1 on mobile, 2 on desktop) -->
+                <div class="md:col-span-2 text-center md:text-left order-1 md:order-2">
+                    <p class="text-lg font-medium text-gray-500 mb-2">Hello, I'm</p>
+                    <h1 class="text-6xl sm:text-7xl font-extrabold mb-4 uppercase"
+                        style="color:var(--text-color); letter-spacing: 0.05em;">Sagar Jha</h1>
+                    <h2 class="text-xl sm:text-2xl font-semibold mb-6" style="color:var(--secondary-color);">Entrepreneur & Healthcare Innovator — Founder of Medizo</h2>
+                    <p class="text-lg mb-10 max-w-2xl mx-auto md:mx-0" style="color:var(--text-color);">Qualified entrepreneur and startup establisher with clinical expertise. Founded Medizo to revolutionize healthcare access through innovative e-commerce solutions. Building scalable business models that transform how medical supplies reach patients and providers.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Professional Code Section -->
+        <section class="reveal py-8">
+            <div class="max-w-3xl mx-auto px-4">
+                <div class="card p-6 bg-gradient-to-r"
+                    style="background: linear-gradient(135deg, var(--card-bg) 0%, var(--card-bg) 100%);">
+                    <p class="text-xl font-semibold mb-4" style="color: var(--primary-color); letter-spacing: 0.05em;">
+                        CLINIC HYGIENE SPECIALIST | ENTREPRENEUR | HEALTHCARE INNOVATOR</p>
+                    <p class="text-lg font-mono text-gray-700 dark:text-gray-300 leading-relaxed" style="opacity: 0.9;">
+                        <span style="color: var(--primary-color); font-weight: 600;">// Transforming healthcare access through innovation</span><br>
+                        if (clinicNeedsModernization()) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;solutions = providedWithExpertise();<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;access = improved(through Medizo);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;impact = built(across communities);<br>
+                        }<br>
+                        <span style="color: var(--primary-color); font-weight: 600;">// Building accessible healthcare
+                            solutions</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="reveal">
+            <h2 class="section-title">About Me</h2>
+            <div class="card about-card p-6 grid md:grid-cols-3 gap-6 items-center">
+                <div class="md:col-span-2">
+                    <p class="text-lg mb-4 leading-relaxed">
+                        Sagar Jha is a clinic hygiene specialist based in Kathmandu, Nepal, with <span
+                            class="about-highlight">extensive experience working in multiple clinics</span>. He is committed to providing
+                        comprehensive, high-quality hygiene and healthcare solutions. His background focuses on
+                        implementing modern techniques for effective clinic management and patient education, ensuring every
+                        healthcare facility operates at optimal standards.
+                    </p>
+                    <p class="text-lg leading-relaxed font-semibold mb-4" style="color:var(--primary-color);">
+                        As a qualified entrepreneur and startup establisher, Sagar Jha founded <span class="about-highlight">Medizo</span>,
+                        an innovative e-commerce platform aimed at revolutionizing access to essential medical supplies and
+                        healthcare equipment.
+                    </p>
+                    <p class="text-base leading-relaxed text-gray-600 dark:text-gray-400">
+                        With deep expertise from working across multiple clinics, Sagar combines hands-on healthcare experience with
+                        entrepreneurial vision, ensuring every solution focuses on improving accessibility and quality of care
+                        for patients and healthcare providers alike.
+                    </p>
+                </div>
+                <div class="md:col-span-1 space-y-4">
+                    <div class="about-stat">
+                        <div class="about-stat-number">10+</div>
+                        <div class="about-stat-label">Clinics Worked In</div>
+                    </div>
+                    <div class="about-stat">
+                        <div class="about-stat-number">1000+</div>
+                        <div class="about-stat-label">Patients Served</div>
+                    </div>
+                    <div class="about-stat">
+                        <div class="about-stat-number">98%</div>
+                        <div class="about-stat-label">Patient Satisfaction Rate</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Medizo Venture in About Section -->
+            <div class="card p-6 mt-8 max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-6 items-center">
+                    <div>
+                        <h3 class="text-3xl font-bold mb-4" style="color:var(--primary-color);">🚀 Founder & Entrepreneur - Medizo
+                        </h3>
+                        <p class="text-lg mb-4 leading-relaxed">
+                            As a qualified entrepreneur and startup establisher, I founded <span class="about-highlight">Medizo</span>, an
+                            innovative e-commerce platform dedicated to revolutionizing healthcare access. Medizo
+                            provides a reliable and efficient source for medicines, medical equipment, and devices
+                            available to everyone, everywhere.
+                        </p>
+                        <p class="text-base leading-relaxed text-gray-600 dark:text-gray-400 mb-4">
+                            Leveraging my extensive clinic experience and deep understanding of healthcare gaps in underserved regions
+                            like Nepal, Medizo focuses on curating quality products and ensuring timely delivery,
+                            bridging the gap between healthcare providers, clinics, and essential resources.
+                        </p>
+                        <p class="text-sm font-semibold" style="color:var(--secondary-color);">
+                            Mission: Making quality healthcare supplies accessible to everyone, everywhere.
+                        </p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="card p-5 border-l-4" style="border-left-color: var(--primary-color);">
+                            <p class="font-bold text-lg mb-2" style="color:var(--primary-color);">📦 Wide Product Range
+                            </p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Medicines, equipment, devices, and
+                                healthcare supplies curated for quality and reliability</p>
+                        </div>
+                        <div class="card p-5 border-l-4" style="border-left-color: var(--secondary-color);">
+                            <p class="font-bold text-lg mb-2" style="color:var(--secondary-color);">🚚 Timely Delivery
+                            </p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Fast and efficient logistics ensuring
+                                products reach patients when they need them most</p>
+                        </div>
+                        <div class="card p-5 border-l-4" style="border-left-color: var(--primary-color);">
+                            <p class="font-bold text-lg mb-2" style="color:var(--primary-color);">✅ Quality Assured</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Rigorous quality checks and authentic
+                                products only, trusted by healthcare professionals</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8 text-center">
+                    <a href="https://placeholder.com" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center px-8 py-3 font-semibold rounded-full transition transform hover:scale-105"
+                        style="background-color:var(--secondary-color); color:var(--card-bg);">
+                        Explore Medizo
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="reveal">
+            <h2 class="section-title">Experience & Career</h2>
+            <div class="space-y-4">
+                <!-- Experience Summary -->
+                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                    <!-- Total Experience Card -->
+                    <div class="card p-6 border-l-4" style="border-left-color: var(--primary-color);">
+                        <h3 class="text-4xl font-extrabold mb-1" style="color:var(--primary-color);">10+</h3>
+                        <p class="text-lg font-semibold mb-2">Clinics Managed</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Diverse healthcare facilities & clinic operations</p>
+                    </div>
+                    <!-- Patients Treated -->
+                    <div class="card p-6 border-l-4" style="border-left-color: var(--secondary-color);">
+                        <h3 class="text-4xl font-extrabold mb-1" style="color:var(--secondary-color);">1000+</h3>
+                        <p class="text-lg font-semibold mb-2">Patients Served</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Comprehensive healthcare & quality assurance
+                            across facilities</p>
+                    </div>
+                    <!-- Procedures Completed -->
+                    <div class="card p-6 border-l-4" style="border-left-color: var(--primary-color);">
+                        <h3 class="text-4xl font-extrabold mb-1" style="color:var(--primary-color);">99%</h3>
+                        <p class="text-lg font-semibold mb-2">Client Satisfaction</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Clinic partners & healthcare facilities trust</p>
+                    </div>
+                </div>
+
+                <!-- Experience Timeline -->
+                <div class="space-y-4">
+                    <!-- Current Position -->
+                    <div class="card p-6 hover:shadow-lg transition">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center"
+                                style="background-color: var(--primary-color); opacity: 0.1;">
+                                <span style="color: var(--primary-color);">🦷</span>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="text-2xl font-bold" style="color:var(--primary-color);">Clinic Hygiene
+                                            Specialist</h3>
+                                        <p class="font-semibold text-gray-700 dark:text-gray-300">Multiple Clinics
+                                            & Healthcare Facilities</p>
+                                    </div>
+                                    <span class="px-3 py-1 rounded-full text-sm font-semibold"
+                                        style="background-color: var(--primary-color); opacity: 0.2; color: var(--primary-color);">
+                                        2022 — Present
+                                    </span>
+                                </div>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Kathmandu, Nepal</p>
+                                <ul class="list-disc pl-5 space-y-1.5 text-gray-700 dark:text-gray-300">
+                                    <li>Developed and implemented hygiene protocols across 10+ clinics and healthcare facilities</li>
+                                    <li>Managed clinic operations, staff training, and quality assurance standards</li>
+                                    <li>Improved patient experience and clinic efficiency through best practices and modern techniques</li>
+                                    <li>Built strong reputation for expertise, reliability, and comprehensive healthcare solutions</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Clinical Experience -->
+                    <div class="card p-6 hover:shadow-lg transition">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center"
+                                style="background-color: var(--secondary-color); opacity: 0.1;">
+                                <span style="color: var(--secondary-color);">🏥</span>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="text-2xl font-bold" style="color:var(--secondary-color);">Multi-Clinic
+                                            Experience</h3>
+                                        <p class="font-semibold text-gray-700 dark:text-gray-300">Various Healthcare Facilities
+                                            & Clinics</p>
+                                    </div>
+                                    <span class="px-3 py-1 rounded-full text-sm font-semibold"
+                                        style="background-color: var(--secondary-color); opacity: 0.2; color: var(--secondary-color);">
+                                        2019 — Present
+                                    </span>
+                                </div>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Kathmandu, Nepal</p>
+                                <ul class="list-disc pl-5 space-y-1.5 text-gray-700 dark:text-gray-300">
+                                    <li>Worked across 10+ diverse healthcare clinics and facilities</li>
+                                    <li>Gained hands-on experience in clinic management, hygiene protocols, and healthcare operations</li>
+                                    <li>Developed expertise in staff training, quality assurance, and patient care coordination
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="reveal">
+            <h2 class="section-title">Entrepreneurial & Clinical Skills</h2>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+
+                 <div class="card skill-card p-5 text-center">
+                    <div class="skill-icon">💼</div>
+                    <p class="font-bold text-lg" style="color:var(--secondary-color);">Business Strategy</p>
+                    <p class="text-xs mt-2 text-gray-600 dark:text-gray-400">Planning & Execution</p>
+                    <div class="skill-level">
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                    </div>
+
+                </div>
+
+                <div class="card skill-card p-5 text-center">
+                    <div class="skill-icon">🚀</div>
+                    <p class="font-bold text-lg" style="color:var(--secondary-color);">Startup Development
+                    </p>
+                    <p class="text-xs mt-2 text-gray-600 dark:text-gray-400">Launch & Scale</p>
+                    <div class="skill-level">
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+
+                    </div>
+                </div>
+
+                <div class="card skill-card p-5 text-center">
+                    <div class="skill-icon">🏥</div>
+                    <p class="font-bold text-lg" style="color:var(--secondary-color);">Healthcare Operations</p>
+                    <p class="text-xs mt-2 text-gray-600 dark:text-gray-400">Management & Quality</p>
+                    <div class="skill-level">
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+
+                    </div>
+                
+                </div>
+
+                 <div class="card skill-card p-5 text-center">
+     <div class="skill-icon">📱</div>
+     <p class="font-bold text-lg" style="color:var(--secondary-color);">E-Commerce Platform</p>
+     <p class="text-xs mt-2 text-gray-600 dark:text-gray-400">Digital Solutions</p>
+     <div class="skill-level">         <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                      
+                    </div>
+                   </div>
+
+                 <div class="card skill-card p-5 text-center">
+     <div class="skill-icon">💡</div>
+     <p class="font-bold text-lg" style="color:var(--secondary-color);">Problem Solving
+                    </p>
+                  <p class="text-xs mt-2 text-gray-600 dark:text-gray-400">Innovation & Creativity</p>
+                   <div class="skill-level">
+                         <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                    
+                    </div>
+                   </div>
+
+                 <div class="card skill-card p-5 text-center">
+         <div class="skill-icon">👥</div>
+         <p class="font-bold text-lg" style="color:var(--secondary-color);">Team Leadership</p>
+         <p class="text-xs mt-2 text-gray-600 dark:text-gray-400">Staff Management</p>
+         <div class="skill-level">  <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                      
+                    </div>
+                     </div>
+
+            <div class="card skill-card p-5 text-center">
+    <div class="skill-icon">📊</div>
+    <p class="font-bold text-lg" style="color:var(--secondary-color);">Market Analysis</p>
+                     <p class="text-xs mt-2 text-gray-600 dark:text-gray-400">Data & Insights
+                    </p>
+                     <div class="skill-level">
+         <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                    </div>
+                </div>
+
+                <div class="card skill-card p-5 text-center">
+                    <div class="skill-icon">🌐</div>
+                    <p class="font-bold text-lg" style="color:var(--secondary-color);">Strategic Networking
+                    </p>
+                    <p class="text-xs mt-2 text-gray-600 dark:text-gray-400">Partnership Building</p>
+                    <div class="skill-level">
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+
+                    </div>
+                </div>
+
+                <div class="card skill-card p-5 text-center">
+                    <div class="skill-icon">💰</div>
+                    <p class="font-bold text-lg" style="color:var(--secondary-color);">Financial Management</p>
+                    <p class="text-xs mt-2 text-gray-600 dark:text-gray-400">Budgeting & Growth</p>
+                    <div class="skill-level">
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                    </div>
+                </div>
+
+                <!-- Clinical Skills -->
+                <div class="card skill-card p-5 text-center">
+                    <div class="skill-icon">🦷</div>
+                    <p class="font-bold text-lg" style="color:var(--secondary-color);">Clinical Expertise</p>
+                    <p class="text-xs mt-2 text-gray-600 dark:text-gray-400">Healthcare Knowledge</p>
+                    <div class="skill-level">
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                    </div>
+                </div>
+
+                <div class="card skill-card p-5 text-center">
+                    <div class="skill-icon">✨</div>
+                    <p class="font-bold text-lg" style="color:var(--secondary-color);">Hygiene Protocols
+                    </p>
+                    <p class="text-xs mt-2 text-gray-600 dark:text-gray-400">Quality Standards</p>
+                    <div class="skill-level">
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+
+                    </div>
+                </div>
+
+                <div class="card skill-card p-5 text-center">
+                    <div class="skill-icon">🔬</div>
+                    <p class="font-bold text-lg" style="color:var(--secondary-color);">Patient Care</p>
+                    <p class="text-xs mt-2 text-gray-600 dark:text-gray-400">Health Education</p>
+                    <div class="skill-level">
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+
+                    </div>
+                
+                </div>
+
+                 <div class="card skill-card p-5 text-center">
+     <div class="skill-icon">🛡️</div>
+     <p class="font-bold text-lg" style="color:var(--secondary-color);">Preventive Care</p>
+     <p class="text-xs mt-2 text-gray-600 dark:text-gray-400">Health Maintenance</p>
+     <div class="skill-level">         <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                      
+                    </div>
+                   </div>
+
+                 <div class="card skill-card p-5 text-center">
+     <div class="skill-icon">📋</div>
+     <p class="font-bold text-lg" style="color:var(--secondary-color);">Medical Documentation
+                    </p>
+                  <p class="text-xs mt-2 text-gray-600 dark:text-gray-400">Records & Compliance</p>
+                   <div class="skill-level">
+                         <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                        <div class="skill-level-dot filled"></div>
+                    
+                    </div>
+                   </div>
+
+            </div>
+        </section>
+
+        <!-- Professional Insights Section (NEW) -->
+        <section id="insights" class="reveal">
+            <h2 class="section-title">Entrepreneurial Insights & Thought Leadership</h2>
+
+            <!-- Featured Article -->
+            <div class="card p-6 mb-6 border-l-4" style="border-left-color: var(--primary-color);">
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="md:col-span-2">
+                        <span
+                            class="inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-3"
+                            style="background-color: var(--primary-color); opacity: 0.2; color: var(--primary-color);">Featured
+                            Article</span>
+                        <h3 class="text-3xl font-bold mt-2 mb-4 hover:opacity-80 transition"
+                            style="color:var(--primary-color);">
+                            Building Medizo: Scaling Healthcare Access Through E-Commerce Innovation
+                        </h3>
+                        <p class="text-base leading-relaxed mb-4 text-gray-700 dark:text-gray-300">
+                            My journey from clinic operations to founding Medizo showcases how entrepreneurial vision can transform
+                            healthcare delivery. By leveraging digital platforms and understanding market gaps in underserved regions,
+                            we're making quality medical supplies accessible to clinics, providers, and patients across Nepal and beyond.
+                        </p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Published: November 2024 | Reading
+                            time: 10 minutes</p>
+                        <a href="insight-medizo-ecommerce.html" class="inline-flex items-center font-semibold hover:scale-105 transition"
+                            style="color:var(--primary-color);">
+                            Read Full Article
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="hidden md:flex items-center justify-center">
+                        <div class="text-6xl">🚀</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Articles Grid -->
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <!-- Article 2 -->
+                <div class="card p-6 hover:shadow-lg transition hover:scale-[1.02]">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-2xl">💼</span>
+                        <span class="text-xs font-semibold uppercase tracking-wider px-2 py-1 rounded-full"
+                            style="background-color: var(--secondary-color); opacity: 0.2; color: var(--secondary-color);">Strategy</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2" style="color:var(--secondary-color);">From Clinic Management to Startup Founder: The Entrepreneurial Mindset</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">October 2024 | 7 min read</p>
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300 mb-4">How my experience managing multiple clinics provided the foundation for understanding business operations, scaling challenges, and market opportunities that led to Medizo.</p>
+                    <a href="insight-clinic-to-founder.html" class="text-sm font-semibold hover:underline" style="color:var(--primary-color);">Read
+                        more →</a>
+                </div>
+
+                <!-- Article 3 -->
+                <div class="card p-6 hover:shadow-lg transition hover:scale-[1.02]">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-2xl">🌍</span>
+                        <span class="text-xs font-semibold uppercase tracking-wider px-2 py-1 rounded-full"
+                            style="background-color: var(--primary-color); opacity: 0.2; color: var(--primary-color);">Impact</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2" style="color:var(--primary-color);">The Future of Healthcare Startups in South Asia</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">September 2024 | 8 min read</p>
+                    <p class="text-base leading-relaxed text-gray-700 dark:text-gray-300 mb-4">Exploring emerging opportunities for healthcare entrepreneurs in South Asian markets, focusing on supply chain innovation, digital solutions, and sustainable business models.</p>
+                    <a href="insight-healthcare-startups.html" class="text-sm font-semibold hover:underline" style="color:var(--primary-color);">Read
+                        more →</a>
+                </div>
+            </div>
+
+            <!-- Professional Quote -->
+            <div class="card p-8 text-center border-t-4" style="border-top-color: var(--primary-color);">
+                <p class="text-2xl font-semibold italic mb-4 text-gray-700 dark:text-gray-300">
+                    "As an entrepreneur, I believe that the real impact comes from identifying market gaps and building scalable solutions. Medizo is my commitment to democratizing access to quality healthcare supplies and empowering both providers and patients."
+                </p>
+                <p class="text-lg font-bold uppercase" style="color:var(--primary-color); letter-spacing: 0.1em;">— Sagar Jha
+                </p>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Clinic Hygiene Specialist, Entrepreneur & Founder of Medizo</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="reveal">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Contact Info -->
+                <div class="md:col-span-1 space-y-4">
+                    <!-- Phone -->
+                    <div class="card p-6 hover:shadow-lg hover:border-primary-color transition">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center"
+                                style="background-color: var(--primary-color); opacity: 0.1;">
+                                <span style="font-size: 1.25rem; color: var(--primary-color);">📞</span>
+                            </div>
+                            <h4 class="text-lg font-semibold" style="color:var(--primary-color);">Call Me</h4>
+                        </div>
+                        <p class="text-2xl font-bold break-words">
+                            <a href="tel:9819973710" class="hover:opacity-70 transition"
+                                style="color:var(--secondary-color);" aria-label="Phone number 9819973710">+977
+                                9819973710</a>
+                        </p>
+                         <p class="text-2xl font-bold break-words">
+                            <a href="tel:9842958080" class="hover:opacity-70 transition"
+                                style="color:var(--secondary-color);" aria-label="Phone number 9842958080">+977
+                                9842958080</a>
+                        </p>
+                        <p class="text-xs text-gray-600 dark:text-gray-400 mt-2">Available for appointments</p>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="card p-6 hover:shadow-lg transition">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center"
+                                style="background-color: var(--secondary-color); opacity: 0.1;">
+                                <span style="font-size: 1.25rem; color: var(--secondary-color);">✉️</span>
+                            </div>
+                            <h4 class="text-lg font-semibold" style="color:var(--secondary-color);">Email</h4>
+                        </div>
+                        <p class="text-base font-bold break-words">
+                            <a href="mailto:Sagarrazza@gmail.com" class="hover:opacity-70 transition"
+                                style="color:var(--secondary-color);"
+                                aria-label="Email address Sagarrazza@gmail.com">Sagarrazza@gmail.com</a>
+                        </p>
+                        <p class="text-xs text-gray-600 dark:text-gray-400 mt-2">Response within 24-48 hours</p>
+                    </div>
+
+                    <!-- Emergency -->
+                    <div class="card p-6 hover:shadow-lg transition border-l-4"
+                        style="border-left-color: var(--primary-color);">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center"
+                                style="background-color: var(--primary-color); opacity: 0.1;">
+                                <span style="font-size: 1.25rem; color: var(--primary-color);">🚨</span>
+                            </div>
+                            <h4 class="text-lg font-semibold" style="color:var(--primary-color);">Emergency</h4>
+                        </div>
+                        <p class="text-sm text-gray-700 dark:text-gray-300">
+                            For urgent dental emergencies, please call the phone number above. I prioritize emergency
+                            cases.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="card p-6 md:col-span-2">
+                    <h3 class="text-2xl font-bold mb-6" style="color:var(--primary-color);">Send Me a Message</h3>
+                    <form id="contactForm" class="space-y-4">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="name" class="block font-semibold mb-2" style="color:var(--text-color);">Your
+                                    Name *</label>
+                                <input type="text" id="name" name="name" class="form-input" placeholder="John Doe"
+                                    required>
+                            </div>
+                            <div>
+                                <label for="email" class="block font-semibold mb-2"
+                                    style="color:var(--text-color);">Your Email *</label>
+                                <input type="email" id="email" name="email" class="form-input"
+                                    placeholder="you@example.com" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="subject" class="block font-semibold mb-2"
+                                style="color:var(--text-color);">Subject *</label>
+                            <input type="text" id="subject" name="subject" class="form-input"
+                                placeholder="e.g., Appointment Request, General Inquiry" required>
+                        </div>
+                        <div>
+                            <label for="message" class="block font-semibold mb-2"
+                                style="color:var(--text-color);">Message *</label>
+                            <textarea id="message" name="message" rows="6" class="form-input"
+                                placeholder="Tell me about your dental needs or questions..." required></textarea>
+                        </div>
+                        <p id="form-error" class="text-red-500 text-sm hidden" role="alert">Please fill out all required
+                            fields with valid information.</p>
+                        <p id="form-success" class="text-green-500 text-sm hidden" role="alert">✅ Message sent
+                            successfully! We'll notify you soon.</p>
+
+                        <button type="submit"
+                            class="w-full px-6 py-3 font-bold rounded-lg transition transform hover:scale-[1.02] focus:ring-4 focus:ring-offset-2 shadow-lg"
+                            style="background-color:var(--primary-color); color:var(--card-bg);">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Controls Panel (Bottom Left) - Theme Toggle -->
+    <div id="floating-controls-panel">
+        <!-- Theme Toggle (Moon/Sun) -->
+        <button id="theme-toggle" class="floating-button" aria-label="Toggle dark mode">
+            <svg id="theme-icon" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M17.293 13.929a1.001 1.001 0 00-1.414 0c-.896.896-2.288 1.121-3.414.654A6.001 6.001 0 0110 5.001c.17 0 .339.018.508.056.288.067.587.165.882.289a8.001 8.001 0 004.538 4.538 6.001 6.001 0 01.654 3.414 1.001 1.001 0 000 1.414z">
+                </path>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-6 border-t" style="border-color:var(--border-color);">
+        <p class="text-sm">&copy; <span id="current-year"></span> <span class="uppercase tracking-wide"
+                style="letter-spacing: 0.1em;">Sagar Jha</span>. All Rights Reserved.</p>
+    </footer>
+
+
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // ---------------------------------
+        // 5. Nebula / Floating Particle Background Setup
+        // ---------------------------------
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let animationFrameId = null;
+        let particleColor = 'rgba(0, 188, 212, 0.5)'; // Default
+
+        // --- Particle Constants for Speed and Density ---
+        const MOVEMENT_MULTIPLIER = 0.25; // 1.25x speed
+        const DENSITY_DIVISOR = 7500;    // Increased density
+        const LINE_DISTANCE = 120;       // Slightly longer connection lines
+
+        // ---------------------------------
+        // 1. Theme Management (Dark/Light Mode)
+        // ---------------------------------
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const root = document.documentElement;
+
+        function updateParticleColor() {
+            // Read the CSS variable value from computed style
+            const htmlElement = document.documentElement;
+            const computedStyle = window.getComputedStyle(htmlElement);
+            const newColor = computedStyle.getPropertyValue('--particle-color').trim();
+            if (newColor && newColor.length > 0) {
+                particleColor = newColor;
+            }
+        }
+
+        function applyTheme(isDark) {
+            if (isDark) {
+                root.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                root.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light');
+            }
+            updateParticleColor();
+            updateThemeIcon(isDark);
+        }
+
+        function updateThemeIcon(isDark) {
+            // Sun for Light Mode, Moon for Dark Mode
+            const iconPath = isDark
+                ? 'M17.293 13.929a1.001 1.001 0 00-1.414 0c-.896.896-2.288 1.121-3.414.654A6.001 6.001 0 0110 5.001c.17 0 .339.018.508.056.288.067.587.165.882.289a8.001 8.001 0 004.538 4.538 6.001 6.001 0 01.654 3.414 1.001 1.001 0 000 1.414z' // Moon path
+                : 'M10 2a8 8 0 018 8c0 2.272-.662 4.385-1.803 6.162A8 8 0 0110 18v-2a6 6 0 006-6c0-2.072-.843-3.957-2.193-5.307A7.962 7.962 0 0110 4z'; // Sun path
+
+            themeIcon.querySelector('path').setAttribute('d', iconPath);
+        }
+
+        function toggleTheme() {
+            const isDark = root.classList.contains('dark-mode');
+            applyTheme(!isDark);
+        }
+
+        // Apply theme on initial load
+        const storedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
+            applyTheme(true);
+        } else {
+            applyTheme(false);
+        }
+
+        themeToggle.addEventListener('click', toggleTheme);
+
+
+        // ---------------------------------
+        // 2. Navbar and Scrolling Logic
+        // ---------------------------------
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuButton = document.getElementById('menu-button');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section');
+
+        // Mobile Menu Toggle
+        menuButton.addEventListener('click', () => {
+            const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+            menuButton.setAttribute('aria-expanded', !isExpanded);
+            mobileMenu.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click and smooth scroll
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+
+                if (targetElement) {
+                    // Smooth scroll
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 64, // Subtract navbar height
+                        behavior: 'smooth'
+                    });
+                }
+
+                // Close mobile menu if open
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                    menuButton.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+
+        // Active Link Highlighting on Scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px 0px -60% 0px', // Highlight section when 40% of it is visible
+            threshold: 0
+        };
+
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const navLink = document.querySelector(`.nav-link[data-section="${entry.target.id}"]`);
+                if (navLink) {
+                    navLink.classList.remove('active');
+                    if (entry.isIntersecting) {
+                        // Remove active class from all links first
+                        navLinks.forEach(link => link.classList.remove('active'));
+                        // Add active class to the current link
+                        navLink.classList.add('active');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            navObserver.observe(section);
+        });
+
+        // Initial Home link activation
+        document.addEventListener('DOMContentLoaded', () => {
+            const homeLink = document.querySelector('.nav-link[data-section="home"]');
+            if (homeLink) {
+                homeLink.classList.add('active');
+            }
+        });
+
+
+        // ---------------------------------
+        // 3. Contact Form handled by EmailJS below
+        // ---------------------------------
+
+        // ---------------------------------
+        // 4. Scroll Reveal Animation
+        // ---------------------------------
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Stop observing after reveal
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // ---------------------------------
+        // 5. Nebula / Floating Particle Background Implementation (Always Running)
+        // ---------------------------------
+
+        // Define Particle class first
+        class Particle {
+            constructor(x, y) {
+                this.x = x || Math.random() * canvas.width;
+                this.y = y || Math.random() * canvas.height;
+                this.radius = Math.random() * 2 + 0.5;
+                this.vx = Math.random() * 1 - 0.5;
+                this.vy = Math.random() * 1 - 0.5;
+            }
+
+            update() {
+                // Applied 1.25x speed increase
+                const MOVEMENT_MULTIPLIER = 0.25;
+                this.x += this.vx * MOVEMENT_MULTIPLIER;
+                this.y += this.vy * MOVEMENT_MULTIPLIER;
+
+                // Loop particles around the screen edges
+                if (this.x < 0 || this.x > canvas.width) {
+                    this.x = this.x < 0 ? canvas.width : 0;
+                }
+                if (this.y < 0 || this.y > canvas.height) {
+                    this.y = this.y < 0 ? canvas.height : 0;
+                }
+
+                // Add slight randomness to movement direction
+                this.vx += (Math.random() - 0.5) * 0.01;
+                this.vy += (Math.random() - 0.5) * 0.01;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+                ctx.fillStyle = particleColor;
+                ctx.fill();
+            }
+
+        }
+
+        // Initialize particles
+        function initParticles() {
+            particles = [];
+            // Increased density
+            const DENSITY_DIVISOR = 7500;
+            const numParticles = Math.floor((canvas.width * canvas.height) / DENSITY_DIVISOR);
+            for (let i = 0; i < numParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        // Adjust canvas size to window size
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles(); // Reinitialize particles on resize
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Main animation loop
+        function animate() {
+            animationFrameId = requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw and update particles
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            // Draw lines between nearby particles (Nebula effect)
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i; j < particles.length; j++) {
+                    const p1 = particles[i];
+                    const p2 = particles[j];
+                    const distance = Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
+
+                    const LINE_DISTANCE = 120;
+                    if (distance < LINE_DISTANCE) { // Max distance for lines
+                        ctx.beginPath();
+
+                        // Calculate opacity based on distance for a fading effect
+                        const opacity = Math.max(0.05, 0.4 - distance / 300);
+                        ctx.strokeStyle = particleColor.replace(/,\s*0\.\d+\)/, `, ${opacity})`);
+
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(p1.x, p1.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        // Start the animation on window load.
+        window.addEventListener('load', function () {
+            // Initial checks after full load
+            updateParticleColor();
+            initParticles(); // Initialize particles with correct color
+            animate(); // Start the perpetual animation
+        });
+    </script>
+
+    <!-- EmailJS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+        (function () {
+            emailjs.init("QOfxD9HTuZEGReMLh");
+            console.log('✓ EmailJS initialized with public key');
+        })();
+
+        document.getElementById("contactForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const formError = document.getElementById("form-error");
+            const formSuccess = document.getElementById("form-success");
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+
+            // Get form values
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const subject = document.getElementById("subject").value;
+            const message = document.getElementById("message").value;
+
+            // Reset messages
+            formError.classList.add('hidden');
+            formSuccess.classList.add('hidden');
+
+            // Disable button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            // Send main email to doctor
+            emailjs.send("service_vhphjkm", "template_gq4aata", {
+                name: name,
+                email: email,
+                title: subject,
+                message: message
+            })
+                .then(() => {
+                    console.log('✓ Main message sent successfully!');
+
+                    // Send auto-reply to user
+                    return emailjs.send("service_vhphjkm", "template_yr4hsfo", {
+                        name: name,
+                        email: email,
+                        message: message
+                    });
+                })
+                .then(() => {
+                    console.log('✓ Auto-reply sent successfully!');
+                    formSuccess.classList.remove('hidden');
+                    document.getElementById("contactForm").reset();
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText;
+                    setTimeout(() => {
+                        formSuccess.classList.add('hidden');
+                    }, 5000);
+                })
+                .catch((error) => {
+                    console.error("✗ EmailJS Error:", error);
+                    formError.textContent = "Failed to send message. Please try again.";
+                    formError.classList.remove('hidden');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText;
+                });
+        });
+    </script>
+
+</body>
+
+</html>
